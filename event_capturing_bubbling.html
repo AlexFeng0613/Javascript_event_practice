@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            padding: 1em;
+            background-color: rgba(200,0,0,0.2);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementsByClassName('child')[0].addEventListener('click', function (event) {
+                console.log('clicked on child div');
+                console.log(event.eventPhase);
+            });
+            document.getElementsByClassName('parent')[0].addEventListener('click', function (event) {
+                console.log('clicked on parent');
+                console.log(event.eventPhase);
+            });
+
+            document.getElementsByClassName('container')[0].addEventListener('click', function (event) {
+                console.log('clicked on container');
+                console.log(event.eventPhase);
+                event.stopImmediatePropagation();
+                // todo: what is the difference between stopPropagation() and stopImmediatePropagation()
+
+            }, true); // phase? 1 - capturing phase
+
+            document.getElementsByClassName('container')[0].addEventListener('click', function (event) {
+                console.log('clicked on container');
+                console.log(event.eventPhase);
+            }, false); // phase? 3 - bubbling phase
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="parent">
+            <div class="child">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

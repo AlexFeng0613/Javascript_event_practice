@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font: 300 1em 'Helvetica Neue'; /* Segoe UI, Calibri */
+        }
+
+        ul {
+
+        }
+
+        span.prop {
+            display: inline-block;
+            padding: 0.5em 0.75em;
+            color: #777;
+            font-size: 0.85em;
+        }
+
+        span.val {
+            display: inline-block;
+            padding: 0.5em 0.75em;
+            color: #777;
+        }
+    </style>
+    <script>
+        // DOMContentLoaded
+            // Register a handler on the button for printing 'Hello World to the console'
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.getElementsByTagName('button')[0].addEventListener('click', function (event) {
+                console.log('Hello World!');
+                var ul = document.getElementsByClassName('container')[0];
+                for (var prop in event) {
+                    console.log(prop); // prints out the property of the element
+                    console.log(event[prop]); // prints out the value of the element
+
+                    var li = document.createElement('li');
+
+                    var span_prop = document.createElement('span');
+                    var span_type = document.createElement('span');
+                    var span_val = document.createElement('span');
+                    span_prop.innerHTML = prop;
+                    span_prop.className = 'prop';
+                    span_type.innerHTML = typeof event[prop];
+                    span_val.innerHTML = event[prop];
+                    span_val.className = 'val';
+
+                    li.appendChild(span_prop);
+                    li.appendChild(span_type);
+                    li.appendChild(span_val);
+
+                    ul.appendChild(li);
+
+                }
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <button>Print Hello World</button>
+
+    <ul class="container">
+        <li>
+            <span class="prop">clientX</span>
+            <span class="val">100</span>
+        </li>
+    </ul>
+
+</body>
+</html>

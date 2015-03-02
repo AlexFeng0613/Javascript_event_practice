@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="base.css"/>
+    <title></title>
+    <style>
+        div#popup { /* 0 1 0 1 */
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0,0,0,0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            display: none;
+
+        }
+        div#popup > div {
+            padding: 3em;
+            font-size: 2em;
+            background-color: white;
+            color: #555;
+            border-radius: 0.5em;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var popup = document.getElementById('popup');
+
+            var container = document.getElementsByClassName('container')[0];
+
+            // event delegation
+            container.addEventListener('click', function (event) {
+                console.log(event.target);
+                popup.firstElementChild.innerHTML = 'You have clicked on div number: ' + /(\d+)$/.exec(event.target.innerHTML)[1];
+                popup.style.display = 'flex';
+            });
+
+
+            for (var i = 0, len = 100; i < len; i++) {
+                var div = document.createElement('div');
+                div.innerHTML = 'This is div ' + (i + 1); // common closure error
+                container.appendChild(div);
+
+                /*div.addEventListener('click', function () {
+                    popup.innerHTML = 'You have clicked on div number: ' + /(\d+)/gmi.exec(this.innerHTML)[1];
+                    popup.style.display = 'flex';
+                });*/
+            }
+
+            popup.addEventListener('click', function () {
+                this.style.display = 'none';
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="popup">
+        <div>You have clicked on &lt;div number here&gt;</div>
+    </div>
+    <div class="container">
+
+    </div>
+</body>
+</html>

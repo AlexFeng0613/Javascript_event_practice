@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        var obj = {};
+        obj.sayHello = function () {
+            console.log('Hello from obj!');
+        };
+        obj.sayHello = function () {
+            console.log('Hello from obj 2!');
+        };
+        obj.sayHello();
+
+
+
+        window.addEventListener('load',  function () {
+            console.log('handler 1');
+        });
+        window.onload = function () {
+            console.log('window.load');
+        };
+        window.addEventListener('load', function () {
+            console.log('handler 2');
+        });
+
+        // <element>.addEventListener(<eventType>, handler, capturing) -- DOM LEVEL 2
+        // <element>.on<eventType> = handler;
+    </script>
+</head>
+<body>
+
+</body>
+</html>

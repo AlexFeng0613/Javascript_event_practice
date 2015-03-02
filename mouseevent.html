@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="base.css"/>
+    <style>
+
+
+
+        body {
+            perspective: 800px;
+            perspective-origin: 50% 50%;
+            display: flex;
+            justify-content: center;
+        }
+
+        div {
+            min-height: 50vh;
+            width: 50vh;
+            background-color: red;
+            color: white;
+            text-shadow: 1px 1px 1px #4d0000;
+            padding: 1em;
+
+            transform: rotateX(30deg);
+        }
+    </style>
+    <title></title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.body.firstElementChild.addEventListener('mousedown', function (event) {
+                this.innerHTML = event.shiftKey ? 'Shift was pressd during mousedown.' : '';
+                this.innerHTML += event.altKey ? '<br/>Alt was pressed during mousedown.' : '';
+            });
+            var initpos, finalpos, xdeg = 0, ydeg = 0;
+            document.body.firstElementChild.addEventListener('mousemove', function (event) {
+
+                finalpos = [event.clientX, event.clientY];
+                if ( typeof initpos !== 'undefined' ) {
+                    var delta = [finalpos[0] - initpos[0], finalpos[1] - initpos[1]];
+                    this.innerHTML = delta.join(', '); // point to the div
+                    xdeg += delta[0];
+                    ydeg += delta[1];
+                    console.log(xdeg, ydeg);
+                    this.style.transform = 'rotateY(' + xdeg + 'deg) rotateX(' + ydeg + 'deg)';
+                }
+                initpos = finalpos;
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div>
+        Print Ctrl / Alt / Shift keys that were pressed
+    </div>
+</body>
+</html>
